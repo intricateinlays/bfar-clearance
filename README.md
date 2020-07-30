@@ -15,11 +15,20 @@
    "invoice_items":[
       {
          "quantity":"1",
-         "description":"Fashion accessory inlay sterling silver ring with turquoise, lab opal and mother of pearl",
+		 "item_name": "MOP (Pinctada maxima)",
+         "description":"Fashion Jewelry",
          "country_of_origin":"PHILIPPINES",
-         "price":100
+		 "weight":"1/4kg",
+         "price":50
+      },
+      {
+         "quantity":"1",
+		 "item_name": "Orange Spiny (Spondylus)",
+         "description":"Fashion Jewelry",
+         "country_of_origin":"PHILIPPINES",
+		 "weight":"1/4kg",
+         "price":50
       }
-   ],
-   "gross_weight":"1\/4 KG"
+   ]
 }
 ```
