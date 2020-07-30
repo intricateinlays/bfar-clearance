@@ -14,26 +14,29 @@ class Exporter extends Fpdi {
     $this->addPage();
     $this->useTemplate($pageId, ['adjustPageSize' => true]);
 
-    $this->WriteText(70, 102, 'Ian Escarro');
-    $this->WriteText(70, 106, ''); // Company name
-    $this->WriteText(70, 110, 'B7L4 Henaville Subd. Estaca, Compostela, Cebu 6003 Philippines');
-    $this->WriteText(70, 114, '09228545058');
+    $this->WriteText(70, 102, $invoice->company_contact);
+    $this->WriteText(70, 106, $invoice->company_name);
+    $this->WriteText(70, 110, $invoice->company_address);
+    $this->WriteText(70, 114, $invoice->company_phone);
 
     $this->WriteText(70, 126, $invoice->customer_name);
     $this->WriteText(70, 130, $invoice->customer_address);
     $this->WriteText(70, 134, 'Personal use - merchandize');
 
-    $this->WriteText(36, 202, 'MOP (Pinctada maxima)'); // Should depend on the item containing shell (e.g. Paua, Hammer, etc)
-    // $this->WriteText(36, 202, 'Orange spiny (spondylus)');
-    $this->WriteText(76, 202, 'Fashion Jewelry');
-    $this->WriteText(122, 202, '1/4 kg');
-    $this->WriteText(160, 202, '$100.00');
+    $y = 202;
+    foreach ($invoice->invoice_items as $invoice_item) {
+      $this->WriteText(36, $y, $invoice_item->item_name);  
+      $this->WriteText(76, $y, $invoice_item->description);
+      $this->WriteText(122, $y, $invoice_item->weight);
+      $this->WriteText(160, $y, '$' . $invoice_item->price);
+      $y += 5;
+    }
 
     $pageId = $this->importPage(2);
     $this->addPage();
     $this->useTemplate($pageId, ['adjustPageSize' => true]);
 
-    $this->WriteText(150, 167, 'Ian Escarro');
+    $this->WriteText(150, 167, $invoice->company_contact);
 
     $this->Output();
   }
@@ -50,10 +53,10 @@ class Exporter extends Fpdi {
 //     $this->AddPage();
 //     $this->SetFont('Arial', 'B', 16);
 
-//     $from = "Ian Escarro
-// B7L4 Henaville Subd. Estaca Compostela 6003 Philippines
-// Phone: +639228545058
-// Email: ian.escarro@gmail.com";
+//     $from = "Juan Dela Cruz
+// Cebu City 6000 Philippines
+// Phone: +639228112233
+// Email: juan@mailinator.com";
 //     $this->MultiCell(80, 7, $from, 1, 'L');
 
 //     $customer_name = $invoice->customer_name;
