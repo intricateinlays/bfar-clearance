@@ -21,11 +21,11 @@ class Exporter extends Fpdi {
 
     $this->WriteText(70, 126, $invoice->customer_name);
     $this->WriteText(70, 130, $invoice->customer_address);
-    $this->WriteText(70, 134, 'Personal use - merchandize');
+    $this->WriteText(70, 134, $invoice->purpose);
 
     $y = 202;
     foreach ($invoice->invoice_items as $invoice_item) {
-      $this->WriteText(36, $y, $invoice_item->item_name);  
+      $this->WriteText(36, $y, $invoice_item->item_name);
       $this->WriteText(76, $y, $invoice_item->description);
       $this->WriteText(122, $y, $invoice_item->weight);
       $this->WriteText(160, $y, '$' . $invoice_item->price);
