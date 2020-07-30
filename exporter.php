@@ -28,7 +28,8 @@ class Exporter extends Fpdi {
       $this->WriteText(36, $y, $invoice_item->item_name);
       $this->WriteText(76, $y, $invoice_item->description);
       $this->WriteText(122, $y, $invoice_item->weight);
-      $this->WriteText(160, $y, '$' . $invoice_item->price);
+      $amount = $invoice_item->price * $invoice_item->quantity;
+      $this->WriteText(160, $y, '$' . number_format($amount, 2));
       $y += 5;
     }
 
